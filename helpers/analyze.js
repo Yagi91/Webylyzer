@@ -22,6 +22,7 @@ const cache = new NodeCache({ stdTTL: 3600 }); // Cache the results for 1 hour
 // Configure axios-retry to retry failed requests up to 3 times with a delay of 1 second between retries
 axiosRetry(axios, { retries: 3, retryDelay: axiosRetry.exponentialDelay });
 
+// Function to analyze the HTML of a given URL
 async function analyzeHTML(url) {
   const response = await axios.get(url);
   const html = response.data;
@@ -35,7 +36,7 @@ async function analyzeHTML(url) {
     headings[`h${i}`] = $(`h${i}`).length;
   }
 
-  const links = $("a");
+  const links = $("a"); // get all the anchor tags in the HTML
   const internalLinks = [];
   const externalLinks = [];
 
@@ -68,11 +69,10 @@ async function analyzeHTML(url) {
           // Check if the link has been cached
           const cachedResult = cache.get(absoluteLink);
           if (cachedResult) {
-            console.log("cachedResult", cachedResult);
             return cachedResult;
           }
           try {
-            console.log("fetching", absoluteLink);
+            // Make a request to the link
             const response = await axios.get(absoluteLink, {
               timeout: 5000,
               maxRedirects: 5,
@@ -86,6 +86,7 @@ async function analyzeHTML(url) {
             cache.set(absoluteLink, result);
             return result;
           } catch (error) {
+            // If the request fails, return an object with the link, status code, and reachable status
             const result = {
               link: absoluteLink,
               status: error.response ? error.response.status : "N/A",
@@ -150,6 +151,7 @@ async function analyzeHTML(url) {
     return hasUsername && hasPassword && hasSubmitButton; // return true if the form contains all the required fields
   };
 
+  // Check if any of the forms in the HTML are likely to be login forms
   const loginform =
     $("form").filter((index, form) => {
       return isLoginForm(form);
