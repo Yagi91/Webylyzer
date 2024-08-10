@@ -1,4 +1,4 @@
-# Web Page Analyzer
+# Webylyzer
 
 ## Overview
 Webylyzer is a web application that allows users to analyze HTML web pages by entering a URL. The application extracts various pieces of information from the HTML document and displays the results in a tabular format. Additionally, it validates the availability of hypermedia links on the page.
