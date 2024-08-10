@@ -20,7 +20,7 @@ Webylyzer is a web application that allows users to analyze HTML web pages by en
 ### Steps
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/web-page-analyzer.git
+    git clone https://github.com/Yagi91/Webylyzer
     cd web-page-analyzer
     ```
 2. Install dependencies:
