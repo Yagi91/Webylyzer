@@ -67,7 +67,7 @@ curl -X POST http://localhost:5000/api/analyzeHTML -H "Content-Type: application
     ```sh
     npm start
     ```
-3. Open your web browser and navigate to `http://localhost:3000`.
+3. Open your web browser and navigate to `http://localhost:5000`.
 
 ## Testing
 Run the tests using the following command:
